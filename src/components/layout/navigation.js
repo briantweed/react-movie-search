@@ -15,7 +15,10 @@ const Navigation = () => {
             height: '38px',
             '& a': {
                 textDecoration: 'none',
-                height: '38px'
+                height: '38px',
+                [theme.breakpoints.up('sm')]: {
+                    height: '22px',
+                }
             },
             '& a.home': {
                 display: 'flex',
