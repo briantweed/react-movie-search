@@ -13,7 +13,7 @@ const SubmitFormButton = (props) => {
     const {loading} = useSelector((state) => state.results);
 
     return (
-        <ButtonGroup disableElevation variant="contained" color="primary">
+        <ButtonGroup disableElevation fullWidth variant="contained" color="primary">
             <Button type={loading ? 'button' : 'submit'}>
                 {loading ? (
                     <>
@@ -25,9 +25,14 @@ const SubmitFormButton = (props) => {
                     </>
                 )}
             </Button>
-            <Tooltip title="clear results">
+            <Tooltip
+                arrow
+                title="clear results"
+                placement="top"
+            >
                 <Button
                     onClick={props.clear}
+                    style={{maxWidth: '50px'}}
                 ><ClearIcon/></Button>
             </Tooltip>
         </ButtonGroup>
