@@ -14,10 +14,18 @@ const Navigation = () => {
             background: '#78a1cb',
             height: '38px',
             '& a': {
+                textDecoration: 'none',
+                height: '38px'
+            },
+            '& a.home': {
+                display: 'flex',
+                alignItems: 'center',
+                color: theme.palette.primary.contrastText
+            },
+            '& a.page': {
                 display: 'none',
                 background: '#6c90b6',
                 color: theme.palette.primary.contrastText,
-                textDecoration: 'none',
                 paddingLeft: theme.spacing(3),
                 paddingRight: theme.spacing(3),
                 paddingTop: theme.spacing(1),
@@ -26,7 +34,7 @@ const Navigation = () => {
                     display: 'inline-block'
                 }
             },
-            '& a:hover': {
+            '& a.page:hover': {
                 background: '#5a7897',
             }
         }
@@ -39,7 +47,7 @@ const Navigation = () => {
         <nav className={classes.root}>
             <Box display="flex" justifyContent="space-between">
                 <Box display="flex" justifyContent="flex-start" alignItems="center" pl={2}>
-                     <MovieIcon/> <b style={{marginLeft: '5px'}}>MovieSearch</b>
+                    <Link to='/' className={'home'}><MovieIcon/><b style={{marginLeft: '5px'}}>MovieSearch</b></Link>
                 </Box>
                 <Box display="flex" justifyContent="flex-end">
                     {routes.map(link => {
@@ -47,6 +55,7 @@ const Navigation = () => {
                             <Link
                                 key={shortId.generate()}
                                 to={link.path}
+                                className={'page'}
                             >{ link.page }</Link>
                         )
                     })}
