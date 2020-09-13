@@ -1,4 +1,4 @@
-import {SET_MOVIE_SEARCH} from "../actionTypes";
+import {STORE_MOVIE_SEARCH} from "../actionTypes";
 
 
 const initialState = {
@@ -8,7 +8,7 @@ const initialState = {
 
 
 const movieSearchReducer = (state = initialState, action) => {
-    if (action.type === SET_MOVIE_SEARCH) {
+    if (action.type === STORE_MOVIE_SEARCH) {
         return Object.assign({}, state, action.payload);
     }
     return state;
