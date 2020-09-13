@@ -10,6 +10,7 @@ const Text = () => {
 
     return (
         <>
+
             <Helmet>
                 <title>MovieSearch | Search Info</title>
             </Helmet>

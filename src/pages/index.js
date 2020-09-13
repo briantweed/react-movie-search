@@ -7,10 +7,13 @@ const Index = () => {
 
     return (
         <>
+
             <Helmet>
                 <title>MovieSearch | Home</title>
             </Helmet>
+
             <MovieContainer/>
+
         </>
     )
 

@@ -21,25 +21,29 @@ const Page = () => {
 };
 
 
-ReactDOM.render(
-    <Provider store={store}>
-        <BrowserRouter>
-            <Layout>
-                <Suspense fallback={<Loading/>}>
-                    <Switch>
-                        <Route exact path="/">
-                            <Page/>
-                        </Route>
-                        <Route path="/:id">
-                            <Page/>
-                        </Route>
-                    </Switch>
-                </Suspense>
-            </Layout>
-        </BrowserRouter>
-    </Provider>,
-    document.getElementById("root")
-);
+const App = () => {
+    return (
+        <Provider store={store}>
+            <BrowserRouter>
+                <Layout>
+                    <Suspense fallback={<Loading/>}>
+                        <Switch>
+                            <Route exact path="/">
+                                <Page/>
+                            </Route>
+                            <Route path="/:id">
+                                <Page/>
+                            </Route>
+                        </Switch>
+                    </Suspense>
+                </Layout>
+            </BrowserRouter>
+        </Provider>
+    )
+};
+
+
+ReactDOM.render(<App/>, document.getElementById("root"));
 
 
 serviceWorker.unregister();
