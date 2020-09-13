@@ -19,7 +19,7 @@ const SubmitFormButton = (props) => {
             <Button type={loading ? 'button' : 'submit'}>
                 {loading ? (
                     <>
-                        <CircularProgress size={18} style={{color: 'white', marginRight: '0.5rem'}} /> loading
+                        <CircularProgress size={18} style={{color: 'white', marginRight: '0.5rem'}} />loading
                     </>
                 ) : (
                     <>

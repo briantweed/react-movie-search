@@ -5,7 +5,7 @@ import {useSelector} from "react-redux";
 const ErrorMessage = () => {
 
     const {error} = useSelector((state) => state.results);
-    const Alert = lazy(() => import('@material-ui/lab/Alert'));
+    const Alert = lazy(() => import("@material-ui/lab/Alert"));
 
     if (!error) {
         return null;
