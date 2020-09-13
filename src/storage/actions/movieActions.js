@@ -67,7 +67,7 @@ const getMovies = async () => {
 
 const getFakeMovies = () => {
     const filter = store.getState().search;
-    const data = Const.FAKE_MOVIES.filter(movie => movie.title.toLowerCase().includes(filter.title.toLowerCase()) && (filter.year ? movie.year.toString() === filter.year.toString() : true))
+    const data = Const.FAKE_MOVIES.filter(movie => movie.title.toLowerCase().includes(filter.title.toLowerCase()) && (filter.year ? movie.year.toString() === filter.year.toString() : true));
     return new Promise(resolve => {
         setTimeout(() => resolve({
             data: data
