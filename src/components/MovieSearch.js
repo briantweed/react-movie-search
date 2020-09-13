@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import shortId from "shortid";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchMovies, setMovieSearch, clearMovies} from "../redux/actions/movieActions";
+import {fetchMovies, setMovieSearch, clearMovies} from "../storage/actions/movieActions";
 import MenuItem from "@material-ui/core/MenuItem";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";

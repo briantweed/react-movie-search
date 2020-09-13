@@ -1,7 +1,7 @@
 import React, {lazy, Suspense} from 'react';
 import ReactDOM from "react-dom";
 import {BrowserRouter, Switch, Route, useParams} from "react-router-dom";
-import store from "./redux/store";
+import store from "./storage/store";
 import {Provider} from "react-redux";
 import Layout from "./components/layout/layout";
 import Loading from "./components/layout/loading";
