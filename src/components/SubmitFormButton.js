@@ -1,16 +1,18 @@
-import React from "react";
+import React, {lazy} from "react";
 import {useSelector} from "react-redux";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Tooltip from '@material-ui/core/Tooltip';
-import SearchIcon from "@material-ui/icons/Search";
 import ClearIcon from '@material-ui/icons/Clear';
-import CircularProgress from "@material-ui/core/CircularProgress";
 
 
 const SubmitFormButton = (props) => {
 
     const {loading} = useSelector((state) => state.results);
+
+    const CircularProgress = lazy(() => import("@material-ui/core/CircularProgress"));
+    const SearchIcon = lazy(() => import("@material-ui/icons/Search"));
+
 
     return (
         <ButtonGroup disableElevation fullWidth variant="contained" color="primary">
