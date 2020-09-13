@@ -43,8 +43,8 @@ export const fetchMovies = () => {
             return json.data;
         } catch (error) {
             const json = await getFakeMovies();
-            dispatch(fetchMoviesSuccess(json.data, true));
             dispatch(fetchMoviesFailure(error));
+            dispatch(fetchMoviesSuccess(json.data, true));
             return json.data;
         }
     };

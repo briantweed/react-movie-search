@@ -1,5 +1,16 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+
+# Initial Setup
+
+Run `npm install`
+
+Add `.env.local` to root directory.
+
+The only env variable is `REACT_APP_MOVIE_API_TOKEN` . 
+Register with [MyApiMovies](https://www.myapimovies.com/register) to generate the necessary token
+
+
 ## Available Scripts
 
 In the project directory, you can run:

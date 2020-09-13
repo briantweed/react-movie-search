@@ -98,6 +98,7 @@ const MovieSearch = () => {
                         onChange={updateField}
                         value={searchForm.year}
                     >
+                        <MenuItem value="">-- select --</MenuItem>
                         {searchableYears().map(year => {
                             return (
                                 <MenuItem

@@ -21,7 +21,7 @@ const Footer = () => {
 
     return (
         <footer className={classes.root}>
-            <span>&copy; { year }</span>
+            <span>&copy;{ year } brtweed</span>
         </footer>
     );
 
