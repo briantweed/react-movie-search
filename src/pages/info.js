@@ -7,6 +7,7 @@ import {FAKE_MOVIES} from "../constants";
 const Text = () => {
 
     const {title, year} = useSelector((state) => state.search);
+    const history = useSelector((state) => state.history);
 
     return (
         <>
@@ -26,6 +27,29 @@ const Text = () => {
                     <td><b>Year:</b></td>
                     <td>"{ year ? year : "n/a" }"</td>
                 </tr>
+                </tbody>
+            </table>
+
+
+
+            <br/><br/>
+
+            <h2>Search History</h2>
+            <table>
+                <thead>
+                <tr>
+                    <td><b>Title</b></td>
+                    <td><b>Year</b></td>
+                </tr>
+                </thead>
+                <tbody>
+                    {history.map(movie => {
+                        return (
+                            <tr key={shortId.generate()}>
+                                <td>{ movie.title }</td><td>{ movie.year ? movie.year : '---' }</td>
+                            </tr>
+                        )
+                    })}
                 </tbody>
             </table>
 

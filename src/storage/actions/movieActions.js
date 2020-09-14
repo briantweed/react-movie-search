@@ -1,4 +1,4 @@
-import {STORE_MOVIE_SEARCH, FETCH_MOVIES_BEGIN, FETCH_MOVIES_SUCCESS, FETCH_MOVIES_FAILURE, CLEAR_MOVIES} from "../actionTypes";
+import {STORE_MOVIE_SEARCH, FETCH_MOVIES_BEGIN, FETCH_MOVIES_SUCCESS, FETCH_MOVIES_FAILURE, CLEAR_MOVIES, STORE_SEARCH_HISTORY} from "../actionTypes";
 import * as Const from "../../constants";
 import store from '../store';
 
@@ -9,6 +9,13 @@ export const setMovieSearch = (data) => {
         payload: {...data}
     }
 };
+
+
+export const storeSearchHistory = (data) => ({
+    type: STORE_SEARCH_HISTORY,
+    payload: {...data}
+});
+
 
 
 export const fetchMoviesBegin = () => ({

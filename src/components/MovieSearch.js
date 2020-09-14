@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import shortId from "shortid";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchMovies, setMovieSearch, clearMovies} from "../storage/actions/movieActions";
+import {fetchMovies, setMovieSearch, clearMovies, storeSearchHistory} from "../storage/actions/movieActions";
 import MenuItem from "@material-ui/core/MenuItem";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
@@ -64,8 +64,14 @@ const MovieSearch = () => {
     const classes = useStyles();
 
 
+    const submitForm = () => {
+        dispatch(fetchMovies());
+        dispatch(storeSearchHistory(searchForm));
+    }
+
+
     return (
-        <form onSubmit={e => { e.preventDefault(); dispatch(fetchMovies()) }}>
+        <form onSubmit={e => { e.preventDefault(); submitForm() }}>
 
             <Grid container spacing={4}>
                 <Grid item xs={12} sm={5} lg={5}>

@@ -10,7 +10,8 @@ const store = createStore(rootReducer, loadedState, applyMiddleware(thunk));
 store.subscribe(() => {
     saveState({
         search: store.getState().search,
-        results: store.getState().results
+        results: store.getState().results,
+        history: store.getState().history
     });
 });
 
