@@ -9,8 +9,8 @@ const routes = [
         "icon": HomeIcon
     },
     {
-        "page": "Info",
-        "path": "/info",
+        "page": "History",
+        "path": "/history",
         "icon": InfoIcon
     }
 ];

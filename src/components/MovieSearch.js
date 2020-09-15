@@ -1,12 +1,10 @@
 import React, {useState, useEffect} from "react";
-import shortId from "shortid";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchMovies, setMovieSearch, clearMovies, storeSearchHistory} from "../storage/actions/movieActions";
-import MenuItem from "@material-ui/core/MenuItem";
+import {fetchMovies, setMovieSearch, clearMovies, storeSearchHistory} from "../storage/actions";
 import Grid from "@material-ui/core/Grid";
-import TextField from "@material-ui/core/TextField";
+import SearchByTitle from "./SearchByTitle";
+import SearchByYear from "./SearchByYear";
 import SubmitFormButton from "./SubmitFormButton";
-import {makeStyles} from "@material-ui/core/styles";
 
 
 const MovieSearch = () => {
@@ -29,7 +27,15 @@ const MovieSearch = () => {
     };
 
 
-    const clear = () => {
+    const updateSelect = (e, value) => {
+        setSearchForm({
+            ...searchForm,
+            year: value
+        });
+    };
+
+
+    const clearFields = () => {
         setSearchForm({
             title: '',
             year: ''
@@ -43,80 +49,30 @@ const MovieSearch = () => {
     }, [dispatch, searchForm]);
 
 
-    const searchableYears = () => {
-        const years = [];
-        const thisYear = new Date().getFullYear();
-        for (let year = thisYear; year >= 1900; year--) {
-            years.push(year);
-        }
-        return years;
-    };
-
-
-    const useStyles = makeStyles(() => ({
-        root: {
-            "& label .MuiFormLabel-asterisk": {
-                color: "#d8000d"
-            }
-        }
-    }));
-
-    const classes = useStyles();
-
-
     const submitForm = () => {
         dispatch(fetchMovies());
         dispatch(storeSearchHistory(searchForm));
-    }
+    };
 
 
     return (
         <form onSubmit={e => { e.preventDefault(); submitForm() }}>
 
             <Grid container spacing={4}>
-                <Grid item xs={12} sm={5} lg={5}>
-                    <TextField
-                        id="title"
-                        name="title"
-                        label="Movie Title"
-                        variant="outlined"
-                        size="small"
-                        color="primary"
-                        fullWidth
-                        required
-                        InputLabelProps={{shrink: true}}
-                        onChange={updateField}
-                        value={searchForm.title}
-                        className={classes.root}
+                <Grid item xs={12} sm={4} lg={5}>
+                    <SearchByTitle
+                        action={updateField}
+                        title={searchForm.title}
                     />
                 </Grid>
                 <Grid item xs={12} sm={4} lg={5}>
-                    <TextField
-                        select
-                        id="year"
-                        name="year"
-                        label="Release Year"
-                        variant="outlined"
-                        size="small"
-                        color="primary"
-                        fullWidth
-                        InputLabelProps={{shrink: true}}
-                        onChange={updateField}
-                        value={searchForm.year}
-                    >
-                        <MenuItem value="">-- select --</MenuItem>
-                        {searchableYears().map(year => {
-                            return (
-                                <MenuItem
-                                    key={shortId.generate()}
-                                    value={year}
-                                >{ year }</MenuItem>
-                            )
-                        })}
-                    </TextField>
+                    <SearchByYear
+                        action={updateSelect}
+                        year={searchForm.year}
+                    />
                 </Grid>
-                <Grid item xs={12} sm={3} lg={2}>
-                    <SubmitFormButton clear={clear}/>
+                <Grid item xs={12} sm={4} lg={2}>
+                    <SubmitFormButton clear={clearFields} />
                 </Grid>
             </Grid>
 

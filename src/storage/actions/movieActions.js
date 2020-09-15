@@ -1,43 +1,48 @@
-import {STORE_MOVIE_SEARCH, FETCH_MOVIES_BEGIN, FETCH_MOVIES_SUCCESS, FETCH_MOVIES_FAILURE, CLEAR_MOVIES, STORE_SEARCH_HISTORY} from "../actionTypes";
+import * as action from "../actionTypes";
 import * as Const from "../../constants";
 import store from '../store';
 
 
 export const setMovieSearch = (data) => {
     return {
-        type: STORE_MOVIE_SEARCH,
+        type: action.STORE_MOVIE_SEARCH,
         payload: {...data}
     }
 };
 
 
 export const storeSearchHistory = (data) => ({
-    type: STORE_SEARCH_HISTORY,
+    type: action.STORE_SEARCH_HISTORY,
     payload: {...data}
 });
 
 
-
 export const fetchMoviesBegin = () => ({
-    type: FETCH_MOVIES_BEGIN
+    type: action.FETCH_MOVIES_BEGIN
 });
 
 
 export const fetchMoviesSuccess = (movies, fake = false) => ({
-    type: FETCH_MOVIES_SUCCESS,
+    type: action.FETCH_MOVIES_SUCCESS,
     payload: {movies},
     fake: fake
 });
 
 
 export const fetchMoviesFailure = (error) => ({
-    type: FETCH_MOVIES_FAILURE,
+    type: action.FETCH_MOVIES_FAILURE,
     payload: {error}
 });
 
 
 export const clearMovies = () => ({
-    type: CLEAR_MOVIES
+    type: action.CLEAR_MOVIES
+});
+
+
+export const changePage = (page) => ({
+    type: action.CHANGE_PAGE,
+    page: page
 });
 
 
@@ -46,13 +51,13 @@ export const fetchMovies = () => {
         dispatch(fetchMoviesBegin());
         try {
             const json = await getMovies();
-            dispatch(fetchMoviesSuccess(json.data));
-            return json.data;
+            dispatch(fetchMoviesSuccess(json));
+            return json;
         } catch (error) {
             const json = await getFakeMovies();
             dispatch(fetchMoviesFailure(error));
-            dispatch(fetchMoviesSuccess(json.data, true));
-            return json.data;
+            dispatch(fetchMoviesSuccess(json, true));
+            return json;
         }
     };
 };
@@ -60,7 +65,8 @@ export const fetchMovies = () => {
 
 const getMovies = async () => {
     const filter = store.getState().search;
-    const response = await fetch(Const.MOVIE_API_URL + "movie/search?exact=true&title=" + filter.title + "&year=" + filter.year + "&token=" + Const.MOVIE_API_TOKEN);
+    const page = store.getState().results.page;
+    const response = await fetch(Const.MOVIE_API_URL + "movie/search?exact=true&title=" + filter.title + "&year=" + filter.year + "&page=" + page + "&token=" + Const.MOVIE_API_TOKEN);
     let text = await response.text();
     let json = text && text.length ? JSON.parse(text) : {};
 
@@ -80,4 +86,12 @@ const getFakeMovies = () => {
             data: data
         }), 1000);
     });
+};
+
+
+export const updatePage = (page) => {
+    return async (dispatch) => {
+        dispatch(changePage(page));
+        dispatch(fetchMovies());
+    };
 };
