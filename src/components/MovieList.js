@@ -21,16 +21,17 @@ const MovieList = () => {
 
     const {loading} = useSelector((state) => state.results);
 
-    if (!movies.length) {
-        return null;
-    }
-
     const Loading = lazy(() => import("../components/layout/loading"));
 
 
     const handlePageChange = (e, page) => {
         dispatch(updatePage(page));
     };
+
+
+    if (!movies.length) {
+        return null;
+    }
 
 
     return (
