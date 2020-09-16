@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchMovies, setMovieSearch, clearMovies, storeSearchHistory} from "../storage/actions";
+import {fetchMovies, storeMovieSearch, clearMovies, storeSearchHistory} from "../storage/actions";
 import Grid from "@material-ui/core/Grid";
 import SearchByTitle from "./SearchByTitle";
 import SearchByYear from "./SearchByYear";
@@ -45,7 +45,7 @@ const MovieSearch = () => {
 
 
     useEffect(() => {
-        dispatch(setMovieSearch(searchForm));
+        dispatch(storeMovieSearch(searchForm));
     }, [dispatch, searchForm]);
 
 

@@ -22,6 +22,7 @@ const SearchHistoryList = () => {
                         <TableCell><b>Title</b></TableCell>
                         <TableCell><b>Year</b></TableCell>
                         <TableCell><b>Date</b></TableCell>
+                        <TableCell/>
                     </TableRow>
                 </TableHead>
                 <TableBody>

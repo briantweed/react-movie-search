@@ -3,6 +3,7 @@ import {useSelector} from "react-redux";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Tooltip from '@material-ui/core/Tooltip';
+import Zoom from '@material-ui/core/Zoom';
 import ClearIcon from '@material-ui/icons/Clear';
 
 
@@ -31,6 +32,8 @@ const SubmitFormButton = (props) => {
                 arrow
                 title="clear results"
                 placement="top"
+                enterDelay={500}
+                TransitionComponent={Zoom}
             >
                 <Button
                     onClick={props.clear}

@@ -8,10 +8,14 @@ const initialState = {
 
 
 const movieSearchReducer = (state = initialState, action) => {
-    if (action.type === STORE_MOVIE_SEARCH) {
-        return Object.assign({}, state, action.payload);
+
+    switch(action.type) {
+        case STORE_MOVIE_SEARCH:
+            return Object.assign({}, state, action.payload);
+
+        default:
+            return state;
     }
-    return state;
 };
 
 

@@ -3,18 +3,12 @@ import * as Const from "../../constants";
 import store from '../store';
 
 
-export const setMovieSearch = (data) => {
+export const storeMovieSearch = (data) => {
     return {
         type: action.STORE_MOVIE_SEARCH,
         payload: {...data}
     }
 };
-
-
-export const storeSearchHistory = (data) => ({
-    type: action.STORE_SEARCH_HISTORY,
-    payload: {...data}
-});
 
 
 export const fetchMoviesBegin = () => ({
@@ -66,7 +60,7 @@ export const fetchMovies = () => {
 const getMovies = async () => {
     const filter = store.getState().search;
     const page = store.getState().results.page;
-    const response = await fetch(Const.MOVIE_API_URL + "movie/search?exact=true&title=" + filter.title + "&year=" + filter.year + "&page=" + page + "&token=" + Const.MOVIE_API_TOKEN);
+    const response = await fetch(Const.MOVIE_API_URL + "movie/search?exact=true&title=" + filter.title + "&year=" + (filter.year ? filter.year : '') + "&page=" + page + "&token=" + Const.MOVIE_API_TOKEN);
     let text = await response.text();
     let json = text && text.length ? JSON.parse(text) : {};
 
