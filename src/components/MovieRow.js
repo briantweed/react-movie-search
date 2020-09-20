@@ -1,13 +1,34 @@
 import React from "react";
 import shortId from "shortid";
+import {useDispatch} from "react-redux";
+import {useHistory} from "react-router-dom";
+import {fetchMovieDetails} from "../storage/actions";
+import {makeStyles} from "@material-ui/core/styles";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import Hidden from "@material-ui/core/Hidden";
+import Button from "@material-ui/core/Button";
 
 
 const MovieRow = (props) => {
 
+    const dispatch = useDispatch();
+
+    const history = useHistory();
+
     const {movie} = props;
+
+    const useStyles = makeStyles(() => ({
+        root: {
+            textTransform: "inherit",
+            "&:hover": {
+                background: 'none',
+                textDecoration: 'underline'
+            }
+        }
+    }));
+
+    const classes = useStyles();
 
     const formatReleaseDate = (releaseDate) => {
         if (releaseDate) {
@@ -32,11 +53,18 @@ const MovieRow = (props) => {
     };
 
 
+    const handleClick = (movie) => {
+        dispatch(fetchMovieDetails(movie.imdbId));
+
+        history.push("/movie/" + movie.title);
+    };
+
+
     return (
         <TableRow key={shortId.generate()}>
             <TableCell>
                 {movie.imdbId ? (
-                    <a target="_blank" rel="noreferrer noopener"href={"https://www.imdb.com/title/" + movie.imdbId}>{movie.title}</a>
+                    <Button disableRipple className={classes.root} onClick={e => handleClick(movie)}>{movie.title}</Button>
                 ) : (
                     <>{ movie.title }</>
                 )}

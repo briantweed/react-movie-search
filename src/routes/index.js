@@ -12,6 +12,11 @@ const routes = [
         "page": "History",
         "path": "/history",
         "icon": InfoIcon
+    },
+    {
+        "page": "Movie",
+        "path": "/movie",
+        "sidebar": false
     }
 ];
 

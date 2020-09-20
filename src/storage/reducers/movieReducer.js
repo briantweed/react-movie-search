@@ -1,11 +1,8 @@
-import {FETCH_MOVIES_BEGIN, FETCH_MOVIES_SUCCESS, FETCH_MOVIES_FAILURE, CLEAR_MOVIES, CHANGE_PAGE} from "../actionTypes";
+import {FETCH_MOVIE_BEGIN, FETCH_MOVIE_SUCCESS, FETCH_MOVIE_FAILURE, CLEAR_MOVIE} from "../actionTypes";
 
 
 const initialState = {
-    movies: [],
-    page: 1,
-    pages: 0,
-    fake: false,
+    movie: {},
     loading: false,
     error: null
 };
@@ -14,41 +11,29 @@ const initialState = {
 const movieReducer = (state = initialState, action) => {
 
     switch (action.type) {
-        case FETCH_MOVIES_BEGIN:
+        case FETCH_MOVIE_BEGIN:
             return {
-                ...state,
                 loading: true,
-                error: null
+                error: null,
+                movie: {}
             };
 
-        case FETCH_MOVIES_SUCCESS:
+        case FETCH_MOVIE_SUCCESS:
             return {
-                ...state,
                 loading: false,
-                fake: action.fake,
-                movies: action.payload.movies.data.sort((a, b) => (a.title > b.title) ? 1 : -1),
-                pages: Math.ceil(action.payload.movies.total / 20)
+                error: null,
+                movie: action.payload.movie.data
             };
 
-        case FETCH_MOVIES_FAILURE:
+        case FETCH_MOVIE_FAILURE:
             return {
-                ...state,
                 loading: false,
                 error: action.payload.error,
-                movies: [],
-                page: 1,
-                pages: 0,
+                movie: {},
             };
 
-        case CLEAR_MOVIES:
+        case CLEAR_MOVIE:
             return initialState;
-
-        case CHANGE_PAGE:
-            return {
-                ...state,
-                page: action.page,
-                error: null
-            };
 
         default:
             return state;

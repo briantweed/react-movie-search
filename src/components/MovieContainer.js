@@ -2,8 +2,7 @@ import React from "react";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import MovieList from "./MovieList";
-import ErrorMessage from "./ErrorMessage";
-import MovieSearch from "./MovieSearch";
+import MovieBanner from "./MovieBanner";
 
 
 const MovieContainer = () => {
@@ -12,17 +11,9 @@ const MovieContainer = () => {
         <Box>
             <Grid container spacing={2}>
 
-                <Grid item xs={12}>
-                    <MovieSearch/>
-                </Grid>
+                <MovieBanner/>
 
-                <Grid item xs={12}>
-                    <ErrorMessage/>
-                </Grid>
-
-                <Grid item xs={12}>
-                    <MovieList/>
-                </Grid>
+                <MovieList/>
 
             </Grid>
         </Box>

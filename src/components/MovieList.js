@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import shortId from "shortid";
 import {updatePage} from "../storage/actions";
 import Hidden from "@material-ui/core/Hidden";
+import Grid from "@material-ui/core/Grid";
 import TableContainer from "@material-ui/core/TableContainer";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
@@ -35,7 +36,8 @@ const MovieList = () => {
 
 
     return (
-        <>
+        <Grid item xs={12}>
+
             {loading ? (
                 <Loading/>
             ) : (
@@ -69,7 +71,7 @@ const MovieList = () => {
 
             <br/>
 
-            {!fake && (
+            {(!fake && pages > 1) &&(
                 <Pagination
                     count={pages}
                     page={page}
@@ -80,7 +82,7 @@ const MovieList = () => {
                 />
             )}
 
-        </>
+        </Grid>
     )
 
 };

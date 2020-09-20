@@ -29,8 +29,35 @@ export const fetchMoviesFailure = (error) => ({
 });
 
 
+export const fetchMovieBegin = () => ({
+    type: action.FETCH_MOVIE_BEGIN
+});
+
+
+export const fetchMovieSuccess = (movie) => ({
+    type: action.FETCH_MOVIE_SUCCESS,
+    payload: {movie}
+});
+
+
+export const fetchMovieFailure = (error) => ({
+    type: action.FETCH_MOVIE_FAILURE,
+    payload: {error}
+});
+
+
 export const clearMovies = () => ({
     type: action.CLEAR_MOVIES
+});
+
+
+export const clearMovie = () => ({
+    type: action.CLEAR_MOVIE
+});
+
+
+export const clearSearch = () => ({
+    type: action.CLEAR_SEARCH
 });
 
 
@@ -48,10 +75,20 @@ export const fetchMovies = () => {
             dispatch(fetchMoviesSuccess(json));
             return json;
         } catch (error) {
-            const json = await getFakeMovies();
             dispatch(fetchMoviesFailure(error));
-            dispatch(fetchMoviesSuccess(json, true));
-            return json;
+        }
+    };
+};
+
+export const fetchMovieDetails = (movieId) => {
+    return async (dispatch) => {
+        dispatch(fetchMovieBegin());
+        try {
+            const json = await getMovie(movieId);
+            dispatch(fetchMovieSuccess(json));
+
+        } catch (error) {
+            dispatch(fetchMovieFailure(error));
         }
     };
 };
@@ -71,17 +108,17 @@ const getMovies = async () => {
     }
 };
 
+const getMovie = async (movieId) => {
+    const response = await fetch(Const.MOVIE_API_URL + "movie/" + movieId + "?token=" + Const.MOVIE_API_TOKEN);
+    let text = await response.text();
+    let json = text && text.length ? JSON.parse(text) : {};
 
-const getFakeMovies = () => {
-    const filter = store.getState().search;
-    const data = Const.FAKE_MOVIES.filter(movie => movie.title.toLowerCase().includes(filter.title.toLowerCase()) && (filter.year ? movie.year.toString() === filter.year.toString() : true));
-    return new Promise(resolve => {
-        setTimeout(() => resolve({
-            data: data
-        }), 1000);
-    });
+    if (response.ok) {
+        return json;
+    } else {
+        throw json.error;
+    }
 };
-
 
 export const updatePage = (page) => {
     return async (dispatch) => {

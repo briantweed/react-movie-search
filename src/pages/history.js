@@ -3,7 +3,7 @@ import Helmet from "react-helmet";
 import SearchHistoryList from "../components/SearchHistoryList";
 
 
-const Text = () => {
+const History = () => {
 
     return (
         <>
@@ -11,8 +11,6 @@ const Text = () => {
             <Helmet>
                 <title>MovieSearch | Search History</title>
             </Helmet>
-
-            <h2>Search History</h2>
 
             <SearchHistoryList/>
 
@@ -22,4 +20,4 @@ const Text = () => {
 };
 
 
-export default Text;
+export default History;

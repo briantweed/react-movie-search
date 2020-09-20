@@ -12,7 +12,8 @@ store.subscribe(
     throttle( () => saveState({
         search: store.getState().search,
         results: store.getState().results,
-        history: store.getState().history
+        history: store.getState().history,
+        movie: store.getState().movie,
     }), 2000)
 );
 

@@ -12,8 +12,6 @@ const Index = () => {
                 <title>MovieSearch | Home</title>
             </Helmet>
 
-            <h2>Movie Search</h2>
-
             <MovieContainer/>
 
         </>

@@ -81,6 +81,10 @@ const Sidebar = () => {
             <span>MENU</span>
             {routes.map(link => {
 
+                if (link.sidebar === false) {
+                    return null;
+                }
+
                 const Icon = link.icon ? link.icon : CounterIcon;
                 const isCurrent = currentPath === link.path ? 'current' : '';
 

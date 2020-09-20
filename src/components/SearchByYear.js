@@ -6,7 +6,7 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 const SearchByYear = (props) => {
 
     const searchableYears = () => {
-        const years = [];
+        const years = [''];
         const thisYear = new Date().getFullYear();
         for (let year = thisYear; year >= 1900; year--) {
             years.push(year.toString());

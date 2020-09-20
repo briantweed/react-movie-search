@@ -1,15 +1,18 @@
 import React, {useState, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchMovies, storeMovieSearch, clearMovies, storeSearchHistory} from "../storage/actions";
+import {fetchMovies, storeMovieSearch, clearMovies, clearMovie, clearSearch, storeSearchHistory} from "../storage/actions";
 import Grid from "@material-ui/core/Grid";
 import SearchByTitle from "./SearchByTitle";
 import SearchByYear from "./SearchByYear";
 import SubmitFormButton from "./SubmitFormButton";
+import {useHistory} from "react-router-dom";
 
 
 const MovieSearch = () => {
 
     const dispatch = useDispatch();
+
+    const history = useHistory();
 
     const {title, year} = useSelector((state) => state.search);
 
@@ -40,7 +43,10 @@ const MovieSearch = () => {
             title: '',
             year: ''
         });
-        dispatch(clearMovies())
+        dispatch(clearMovies());
+        dispatch(clearMovie());
+        dispatch(clearSearch());
+        history.push("/");
     };
 
 
@@ -50,6 +56,7 @@ const MovieSearch = () => {
 
 
     const submitForm = () => {
+        history.push("/");
         dispatch(fetchMovies());
         dispatch(storeSearchHistory(searchForm));
     };
