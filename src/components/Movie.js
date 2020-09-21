@@ -12,7 +12,8 @@ const Movie = () => {
 
     const {movie} = useSelector((state) => state.movie);
 
-    if(!movie.hasOwnProperty('movie')) {
+    console.log();
+    if(!movie) {
         return null;
     }
 
