@@ -7,7 +7,7 @@ const ErrorMessage = () => {
     const {error} = useSelector((state) => state.results);
     const Alert = lazy(() => import("@material-ui/lab/Alert"));
 
-    if (!error) {
+    if (!error || typeof error === 'object') {
         return null;
     }
 
