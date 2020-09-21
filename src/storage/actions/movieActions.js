@@ -138,6 +138,6 @@ const apiCall = async (url) => {
     if (response.ok) {
         return json;
     } else {
-        return json.error;
+        throw json.error;
     }
 };

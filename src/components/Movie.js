@@ -22,7 +22,7 @@ const Movie = () => {
 
     const {details, cast, crew} = movie;
 
-    if(!movie) {
+    if(!movie.details) {
         return null;
     }
 
