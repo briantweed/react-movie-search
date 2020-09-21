@@ -18,7 +18,7 @@ const MovieList = () => {
 
     const dispatch = useDispatch();
 
-    const {movies, fake, page, pages} = useSelector((state) => state.results);
+    const {movies, page, pages} = useSelector((state) => state.results);
 
     const {loading} = useSelector((state) => state.results);
 
@@ -71,7 +71,7 @@ const MovieList = () => {
 
             <br/>
 
-            {(!fake && pages > 1) &&(
+            {pages > 1 && (
                 <Pagination
                     count={pages}
                     page={page}

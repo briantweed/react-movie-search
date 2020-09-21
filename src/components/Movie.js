@@ -13,7 +13,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
-import {capitalize} from "../helpers";
+import {capitalize, rating} from "../helpers";
 
 
 const Movie = () => {
@@ -27,11 +27,6 @@ const Movie = () => {
     }
 
 
-    const round = (value) => {
-        return (Math.round(Number(value) * 2) / 2) / 2;
-    };
-
-    
     const ColorButton = withStyles((theme) => ({
         root: {
             color: theme.palette.getContrastText(yellow[600]),
@@ -61,7 +56,7 @@ const Movie = () => {
                     <Box mb={2}>
                         <Rating
                             name="half-rating-read"
-                            value={round(details.rating)}
+                            value={rating(details.rating)}
                             precision={0.5}
                             readOnly
                         />

@@ -16,10 +16,9 @@ export const fetchMoviesBegin = () => ({
 });
 
 
-export const fetchMoviesSuccess = (movies, fake = false) => ({
+export const fetchMoviesSuccess = (movies) => ({
     type: action.FETCH_MOVIES_SUCCESS,
-    payload: {movies},
-    fake: fake
+    payload: {movies}
 });
 
 

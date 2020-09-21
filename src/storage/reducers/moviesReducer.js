@@ -5,7 +5,6 @@ const initialState = {
     movies: [],
     page: 1,
     pages: 0,
-    fake: false,
     loading: false,
     error: null
 };
@@ -25,7 +24,6 @@ const moviesReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                fake: action.fake,
                 movies: action.payload.movies.data.sort((a, b) => (a.title > b.title) ? 1 : -1),
                 pages: Math.ceil(action.payload.movies.total / 20),
                 error: null
