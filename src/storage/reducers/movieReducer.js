@@ -22,7 +22,7 @@ const movieReducer = (state = initialState, action) => {
             return {
                 loading: false,
                 error: null,
-                movie: action.payload.movie.data
+                movie: action.payload
             };
 
         case FETCH_MOVIE_FAILURE:

@@ -27,7 +27,8 @@ const moviesReducer = (state = initialState, action) => {
                 loading: false,
                 fake: action.fake,
                 movies: action.payload.movies.data.sort((a, b) => (a.title > b.title) ? 1 : -1),
-                pages: Math.ceil(action.payload.movies.total / 20)
+                pages: Math.ceil(action.payload.movies.total / 20),
+                error: null
             };
 
         case FETCH_MOVIES_FAILURE:

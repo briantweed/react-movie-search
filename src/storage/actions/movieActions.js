@@ -36,7 +36,7 @@ export const fetchMovieBegin = () => ({
 
 export const fetchMovieSuccess = (movie) => ({
     type: action.FETCH_MOVIE_SUCCESS,
-    payload: {movie}
+    payload: movie
 });
 
 
@@ -67,6 +67,7 @@ export const changePage = (page) => ({
 });
 
 
+
 export const fetchMovies = () => {
     return async (dispatch) => {
         dispatch(fetchMoviesBegin());
@@ -84,9 +85,14 @@ export const fetchMovieDetails = (movieId) => {
     return async (dispatch) => {
         dispatch(fetchMovieBegin());
         try {
-            const json = await getMovie(movieId);
-            dispatch(fetchMovieSuccess(json));
-
+            const data = {};
+            const details = await getMovie(movieId);
+            const cast = await getCast(movieId);
+            const crew = await getCrew(movieId);
+            data.details = details.data;
+            data.cast = cast.data;
+            data.crew = crew.data;
+            dispatch(fetchMovieSuccess(data));
         } catch (error) {
             dispatch(fetchMovieFailure(error));
         }
@@ -94,35 +100,44 @@ export const fetchMovieDetails = (movieId) => {
 };
 
 
-const getMovies = async () => {
-    const filter = store.getState().search;
-    const page = store.getState().results.page;
-    const response = await fetch(Const.MOVIE_API_URL + "movie/search?exact=true&title=" + filter.title + "&year=" + (filter.year ? filter.year : '') + "&page=" + page + "&token=" + Const.MOVIE_API_TOKEN);
-    let text = await response.text();
-    let json = text && text.length ? JSON.parse(text) : {};
-
-    if (response.ok) {
-        return json;
-    } else {
-        throw json.error;
-    }
-};
-
-const getMovie = async (movieId) => {
-    const response = await fetch(Const.MOVIE_API_URL + "movie/" + movieId + "?token=" + Const.MOVIE_API_TOKEN);
-    let text = await response.text();
-    let json = text && text.length ? JSON.parse(text) : {};
-
-    if (response.ok) {
-        return json;
-    } else {
-        throw json.error;
-    }
-};
-
 export const updatePage = (page) => {
     return async (dispatch) => {
         dispatch(changePage(page));
         dispatch(fetchMovies());
     };
+};
+
+
+const getMovies = async () => {
+    const filter = store.getState().search;
+    const page = store.getState().results.page;
+    return await apiCall(Const.MOVIE_API_URL + "movie/search?exact=true&title=" + filter.title + "&year=" + (filter.year ? filter.year : '') + "&page=" + page + "&token=" + Const.MOVIE_API_TOKEN);
+};
+
+
+const getMovie = async (movieId) => {
+    return await apiCall(Const.MOVIE_API_URL + "movie/" + movieId + "?token=" + Const.MOVIE_API_TOKEN);
+};
+
+
+const getCast = async (movieId) => {
+    return await apiCall(Const.MOVIE_API_URL + "movie/" + movieId + "/actors?token=" + Const.MOVIE_API_TOKEN);
+};
+
+
+const getCrew = async (movieId) => {
+    return await apiCall(Const.MOVIE_API_URL + "movie/" + movieId + "/crew?token=" + Const.MOVIE_API_TOKEN);
+};
+
+
+const apiCall = async (url) => {
+    const response = await fetch(url);
+    let text = await response.text();
+    let json = text && text.length ? JSON.parse(text) : {};
+
+    if (response.ok) {
+        return json;
+    } else {
+        return json.error;
+    }
 };

@@ -8,6 +8,7 @@ import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import Hidden from "@material-ui/core/Hidden";
 import Button from "@material-ui/core/Button";
+import {slugify} from "../helpers";
 
 
 const MovieRow = (props) => {
@@ -56,7 +57,7 @@ const MovieRow = (props) => {
     const handleClick = (movie) => {
         dispatch(fetchMovieDetails(movie.imdbId));
 
-        history.push("/movie/" + movie.title);
+        history.push("/movie/" + slugify(movie.title));
     };
 
 
