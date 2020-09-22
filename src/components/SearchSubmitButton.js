@@ -7,7 +7,7 @@ import Zoom from '@material-ui/core/Zoom';
 import ClearIcon from '@material-ui/icons/Clear';
 
 
-const SubmitFormButton = (props) => {
+const SearchSubmitButton = (props) => {
 
     const {loading} = useSelector((state) => state.results);
 
@@ -47,4 +47,4 @@ const SubmitFormButton = (props) => {
 };
 
 
-export default SubmitFormButton;
+export default SearchSubmitButton;

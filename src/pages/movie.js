@@ -1,6 +1,6 @@
 import React from 'react';
 import Helmet from "react-helmet";
-import MovieDetails from "../components/MovieDetails";
+import MovieContainer from "../components/MovieContainer";
 import {useSelector} from "react-redux";
 
 
@@ -15,10 +15,10 @@ const MoviePage = () => {
         <>
 
             <Helmet>
-                <title>{ "MovieSearch | " + title }</title>
+                <title>{ "SearchForm | " + title }</title>
             </Helmet>
 
-            <MovieDetails/>
+            <MovieContainer/>
 
         </>
     )

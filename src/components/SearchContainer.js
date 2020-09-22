@@ -1,15 +1,15 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
-import MovieSearch from "./MovieSearch";
+import SearchForm from "./SearchForm";
 import ErrorMessage from "./ErrorMessage";
 
 
-const MovieBanner = () => {
+const SearchContainer = () => {
 
     return (
         <>
             <Grid item xs={12}>
-                <MovieSearch/>
+                <SearchForm/>
             </Grid>
 
             <Grid item xs={12}>
@@ -21,4 +21,4 @@ const MovieBanner = () => {
 };
 
 
-export default MovieBanner;
+export default SearchContainer;

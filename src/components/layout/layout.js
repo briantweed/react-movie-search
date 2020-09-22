@@ -1,15 +1,15 @@
 import React from "react";
-import {makeStyles} from "@material-ui/core/styles";
+import withStyles from "@material-ui/core/styles/withStyles";
 import Container from "@material-ui/core/Container";
+import Box from "@material-ui/core/Box";
 import Navigation from "./navigation";
 import Sidebar from "./sidebar";
 import Footer from "./footer";
-import Box from "@material-ui/core/Box";
 
 
 const Layout = (props) => {
 
-    const useStyles = makeStyles((theme) => ({
+    const LayoutContainer = withStyles((theme) => ({
         root: {
             width: 'calc(100% - 50px)',
             [theme.breakpoints.up('sm')]: {
@@ -19,9 +19,8 @@ const Layout = (props) => {
             paddingTop: "2rem",
             paddingBottom: "2rem"
         }
-    }));
+    }))(Container);
 
-    const classes = useStyles();
 
 
     return (
@@ -32,11 +31,11 @@ const Layout = (props) => {
 
                 <Sidebar/>
 
-                <Container maxWidth="xl" className={classes.root}>
+                <LayoutContainer maxWidth="xl">
 
                     { props.children }
 
-                </Container>
+                </LayoutContainer>
 
             </Box>
 

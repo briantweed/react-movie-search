@@ -1,19 +1,14 @@
 import React from "react";
-import shortId from "shortid";
 import {useSelector} from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import Rating from "@material-ui/lab/Rating";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import withStyles from "@material-ui/core/styles/withStyles";
-import { yellow } from '@material-ui/core/colors';
-import TableContainer from "@material-ui/core/TableContainer";
-import Table from "@material-ui/core/Table";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import TableCell from "@material-ui/core/TableCell";
-import TableBody from "@material-ui/core/TableBody";
-import {capitalize, rating} from "../helpers";
+import {yellow} from '@material-ui/core/colors';
+import {rating} from "../helpers";
+import CastList from "./CastList";
+import CrewList from "./CrewList";
 
 
 const Movie = () => {
@@ -84,54 +79,15 @@ const Movie = () => {
 
             <Grid item container spacing={10}>
                 <Grid item xs={12} md={6}>
-                    <h3>Cast</h3>
-                    <TableContainer>
-                        <Table aria-label="simple table">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell><b>Character</b></TableCell>
-                                    <TableCell><b>Actor</b></TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {cast.map(cast => {
-                                    const {name: actor} = cast;
-                                    return (
-                                        <TableRow key={shortId.generate()}>
 
-                                            <TableCell>{cast.character}</TableCell>
-                                            <TableCell>{actor.name}</TableCell>
-                                        </TableRow>
-                                    )
-                                })}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
+                    <CastList cast={cast}/>
+
                 </Grid>
 
                 <Grid item xs={12} md={6}>
-                    <h3>Crew</h3>
-                    <TableContainer>
-                        <Table aria-label="simple table">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell><b>Name</b></TableCell>
-                                    <TableCell><b>Role</b></TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {crew.map(crew => {
-                                    const {name: person} = crew;
-                                    return (
-                                        <TableRow key={shortId.generate()}>
-                                            <TableCell>{capitalize(person.name)}</TableCell>
-                                            <TableCell>{capitalize(crew.type)}</TableCell>
-                                        </TableRow>
-                                    )
-                                })}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
+
+                    <CrewList crew={crew}/>
+
                 </Grid>
             </Grid>
         </>

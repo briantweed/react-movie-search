@@ -1,6 +1,6 @@
 import React from 'react';
-import MovieContainer from "../components/MovieContainer";
 import Helmet from "react-helmet";
+import MoviesContainer from "../components/MoviesContainer";
 
 
 const Index = () => {
@@ -12,7 +12,7 @@ const Index = () => {
                 <title>MovieSearch | Home</title>
             </Helmet>
 
-            <MovieContainer/>
+            <MoviesContainer/>
 
         </>
     )

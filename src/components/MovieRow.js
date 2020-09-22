@@ -3,7 +3,7 @@ import shortId from "shortid";
 import {useDispatch} from "react-redux";
 import {useHistory} from "react-router-dom";
 import {fetchMovieDetails} from "../storage/actions";
-import {makeStyles} from "@material-ui/core/styles";
+import withStyles from "@material-ui/core/styles/withStyles";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import Hidden from "@material-ui/core/Hidden";
@@ -19,17 +19,17 @@ const MovieRow = (props) => {
 
     const {movie} = props;
 
-    const useStyles = makeStyles(() => ({
+    const ButtonLink = withStyles(() => ({
         root: {
             textTransform: "inherit",
+            textAlign: "left",
             "&:hover": {
                 background: 'none',
                 textDecoration: 'underline'
             }
         }
-    }));
+    }))(Button);
 
-    const classes = useStyles();
 
     const formatReleaseDate = (releaseDate) => {
         if (releaseDate) {
@@ -65,7 +65,7 @@ const MovieRow = (props) => {
         <TableRow key={shortId.generate()}>
             <TableCell>
                 {movie.imdbId ? (
-                    <Button disableRipple className={classes.root} onClick={e => handleClick(movie)}>{movie.title}</Button>
+                    <ButtonLink disableRipple onClick={e => handleClick(movie)}>{movie.title}</ButtonLink>
                 ) : (
                     <>{ movie.title }</>
                 )}

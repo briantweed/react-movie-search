@@ -1,14 +1,14 @@
 import React, {useState, useEffect} from "react";
+import {useHistory} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchMovies, storeMovieSearch, clearMovies, clearMovie, clearSearch, storeSearchHistory} from "../storage/actions";
 import Grid from "@material-ui/core/Grid";
 import SearchByTitle from "./SearchByTitle";
 import SearchByYear from "./SearchByYear";
-import SubmitFormButton from "./SubmitFormButton";
-import {useHistory} from "react-router-dom";
+import SearchSubmitButton from "./SearchSubmitButton";
 
 
-const MovieSearch = () => {
+const SearchForm = () => {
 
     const dispatch = useDispatch();
 
@@ -79,7 +79,7 @@ const MovieSearch = () => {
                     />
                 </Grid>
                 <Grid item xs={12} sm={4} lg={2}>
-                    <SubmitFormButton clear={clearFields} />
+                    <SearchSubmitButton clear={clearFields} />
                 </Grid>
             </Grid>
 
@@ -89,4 +89,4 @@ const MovieSearch = () => {
 };
 
 
-export default MovieSearch;
+export default SearchForm;

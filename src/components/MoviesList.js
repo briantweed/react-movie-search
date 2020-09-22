@@ -14,7 +14,7 @@ import Pagination from "@material-ui/lab/Pagination";
 import MovieRow from "./MovieRow";
 
 
-const MovieList = () => {
+const MoviesList = () => {
 
     const dispatch = useDispatch();
 
@@ -88,4 +88,4 @@ const MovieList = () => {
 };
 
 
-export default MovieList;
+export default MoviesList;
