@@ -7,33 +7,56 @@ import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import {capitalize} from "../helpers";
+import withStyles from "@material-ui/core/styles/withStyles";
+import Button from "@material-ui/core/Button";
 
 
 const CrewList = (props) => {
 
     const {crew} = props;
 
+    const ButtonLink = withStyles(() => ({
+        root: {
+            textTransform: "inherit",
+            textAlign: "left",
+            "&:hover": {
+                background: 'none',
+                textDecoration: 'underline'
+            }
+        }
+    }))(Button);
 
     return (
         <>
             <h3>Crew</h3>
+
             <TableContainer>
                 <Table aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <TableCell><b>Name</b></TableCell>
                             <TableCell><b>Role</b></TableCell>
+                            <TableCell><b>Name</b></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {crew.map(crew => {
+
                             const {name: person} = crew;
+
                             return (
                                 <TableRow key={shortId.generate()}>
-                                    <TableCell>{capitalize(person.name)}</TableCell>
                                     <TableCell>{capitalize(crew.type)}</TableCell>
+                                    <TableCell>
+                                        <ButtonLink
+                                            disableRipple
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            href={'https://www.imdb.com/name/' + person.imdbId}
+                                        >{ person.name }</ButtonLink>
+                                    </TableCell>
                                 </TableRow>
                             )
+
                         })}
                     </TableBody>
                 </Table>
