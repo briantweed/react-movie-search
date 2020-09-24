@@ -11,20 +11,21 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import Button from "@material-ui/core/Button";
 
 
+const ButtonLink = withStyles(() => ({
+    root: {
+        textTransform: "inherit",
+        textAlign: "left",
+        "&:hover": {
+            background: 'none',
+            textDecoration: 'underline'
+        }
+    }
+}))(Button);
+
+
 const CrewList = (props) => {
 
     const {crew} = props;
-
-    const ButtonLink = withStyles(() => ({
-        root: {
-            textTransform: "inherit",
-            textAlign: "left",
-            "&:hover": {
-                background: 'none',
-                textDecoration: 'underline'
-            }
-        }
-    }))(Button);
 
     return (
         <>

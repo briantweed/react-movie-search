@@ -3,16 +3,16 @@ import TextField from "@material-ui/core/TextField";
 import withStyles from "@material-ui/core/styles/withStyles";
 
 
-const SearchByTitle = (props) => {
-
-    const SearchField = withStyles(() => ({
-        root: {
-            "& label .MuiFormLabel-asterisk": {
-                color: "#d8000d"
-            }
+const SearchField = withStyles(() => ({
+    root: {
+        "& label .MuiFormLabel-asterisk": {
+            color: "#d8000d"
         }
-    }))(TextField);
+    }
+}))(TextField);
 
+
+const SearchByTitle = (props) => {
 
     return (
         <SearchField

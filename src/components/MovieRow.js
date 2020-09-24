@@ -11,6 +11,18 @@ import Button from "@material-ui/core/Button";
 import {slugify} from "../helpers";
 
 
+const ButtonLink = withStyles(() => ({
+    root: {
+        textTransform: "inherit",
+        textAlign: "left",
+        "&:hover": {
+            background: 'none',
+            textDecoration: 'underline'
+        }
+    }
+}))(Button);
+
+
 const MovieRow = (props) => {
 
     const dispatch = useDispatch();
@@ -18,17 +30,6 @@ const MovieRow = (props) => {
     const history = useHistory();
 
     const {movie} = props;
-
-    const ButtonLink = withStyles(() => ({
-        root: {
-            textTransform: "inherit",
-            textAlign: "left",
-            "&:hover": {
-                background: 'none',
-                textDecoration: 'underline'
-            }
-        }
-    }))(Button);
 
 
     const formatReleaseDate = (releaseDate) => {
