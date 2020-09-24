@@ -66,6 +66,12 @@ export const changePage = (page) => ({
 });
 
 
+export const updateCache = (movie) => ({
+    type: action.CACHE,
+    payload: movie
+})
+
+
 
 export const fetchMovies = () => {
     return async (dispatch) => {
@@ -92,6 +98,7 @@ export const fetchMovieDetails = (movieId) => {
             data.cast = cast.data;
             data.crew = crew.data;
             dispatch(fetchMovieSuccess(data));
+            dispatch(updateCache(data));
         } catch (error) {
             dispatch(fetchMovieFailure(error));
         }

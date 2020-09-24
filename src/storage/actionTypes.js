@@ -23,3 +23,5 @@ export const CLEAR_MOVIES = "CLEAR_MOVIES";
 export const CLEAR_MOVIE = "CLEAR_MOVIE";
 
 export const CLEAR_SEARCH = "CLEAR_SEARCH";
+
+export const CACHE = "CACHE";

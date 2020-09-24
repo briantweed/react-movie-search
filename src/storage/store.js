@@ -14,6 +14,7 @@ store.subscribe(
         results: store.getState().results,
         history: store.getState().history,
         movie: store.getState().movie,
+        cache: store.getState().cache,
     }), 2000)
 );
 
