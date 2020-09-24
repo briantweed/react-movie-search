@@ -10,7 +10,8 @@ const CacheReducer = (state = initialState, action) => {
         case CACHE:
             return [...state,
                 {
-                    [action.payload.details.imdbId] : action.payload
+                    id: action.payload.details.imdbId,
+                    ...action.payload
                 }
             ];
 

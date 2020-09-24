@@ -91,14 +91,20 @@ export const fetchMovieDetails = (movieId) => {
         dispatch(fetchMovieBegin());
         try {
             const data = {};
-            const details = await getMovie(movieId);
-            const cast = await getCast(movieId);
-            const crew = await getCrew(movieId);
-            data.details = details.data;
-            data.cast = cast.data;
-            data.crew = crew.data;
-            dispatch(fetchMovieSuccess(data));
-            dispatch(updateCache(data));
+            const cache = store.getState().cache;
+            const cached = cache.find(movie => movie.id === movieId);
+            if (cached) {
+                dispatch(fetchMovieSuccess(cached));
+            } else {
+                const details = await getMovie(movieId);
+                const cast = await getCast(movieId);
+                const crew = await getCrew(movieId);
+                data.details = details.data;
+                data.cast = cast.data;
+                data.crew = crew.data;
+                dispatch(fetchMovieSuccess(data));
+                dispatch(updateCache(data));
+            }
         } catch (error) {
             dispatch(fetchMovieFailure(error));
         }
