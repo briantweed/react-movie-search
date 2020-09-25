@@ -1,5 +1,6 @@
 import HomeIcon from "@material-ui/icons/Home";
-import InfoIcon from "@material-ui/icons/Info"
+import HistoryIcon from '@material-ui/icons/History';
+import CacheIcon from '@material-ui/icons/Autorenew';
 
 
 const routes = [
@@ -11,7 +12,12 @@ const routes = [
     {
         "page": "History",
         "path": "/history",
-        "icon": InfoIcon
+        "icon": HistoryIcon
+    },
+    {
+        "page": "Cache",
+        "path": "/cache",
+        "icon": CacheIcon
     },
     {
         "page": "Movie",

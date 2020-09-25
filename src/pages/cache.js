@@ -1,6 +1,6 @@
 import React from 'react';
 import Helmet from "react-helmet";
-import SearchHistoryList from "../components/SearchHistoryList";
+import CacheList from "../components/CacheList";
 
 
 const History = () => {
@@ -9,10 +9,10 @@ const History = () => {
         <>
 
             <Helmet>
-                <title>MovieSearch | Search History</title>
+                <title>MovieSearch | Cached Movies</title>
             </Helmet>
 
-            <SearchHistoryList/>
+            <CacheList/>
 
         </>
     )
