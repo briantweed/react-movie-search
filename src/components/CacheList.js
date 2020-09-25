@@ -7,7 +7,10 @@ import CacheRow from "./CacheRow";
 
 const CacheList = () => {
 
-    const cache = useSelector((state) => state.cache);
+    let cache = useSelector((state) => state.cache).sort((a, b) => {
+        return a.details.title > b.details.title ? 1 : -1;
+    });
+
 
     return (
         <Grid container>
