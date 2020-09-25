@@ -77,14 +77,14 @@ const Movie = () => {
                 </Grid>
             </Grid>
 
-            <Grid item container spacing={10}>
-                <Grid item xs={12} md={6}>
+            <Grid item container justify="space-around">
+                <Grid item xs={12} md={5}>
 
                     <CastList cast={cast}/>
 
                 </Grid>
 
-                <Grid item xs={12} md={6}>
+                <Grid item xs={12} md={5}>
 
                     <CrewList crew={crew}/>
 

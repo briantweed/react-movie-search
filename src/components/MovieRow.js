@@ -65,11 +65,7 @@ const MovieRow = (props) => {
     return (
         <TableRow key={shortId.generate()}>
             <TableCell>
-                {movie.imdbId ? (
-                    <ButtonLink disableRipple onClick={e => handleClick(movie)}>{movie.title}</ButtonLink>
-                ) : (
-                    <>{ movie.title }</>
-                )}
+                <ButtonLink disableRipple onClick={e => handleClick(movie)}>{movie.title}</ButtonLink>
             </TableCell>
             <TableCell>{movie.year ? movie.year : "n/a"}</TableCell>
             <Hidden xsDown>
