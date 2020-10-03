@@ -12,6 +12,7 @@ export const slugify = (string) => {
         .replace(/-+$/, '');
 };
 
+
 export const capitalize = (text) => {
     if (typeof text !== 'string') {
         return '';
@@ -21,6 +22,19 @@ export const capitalize = (text) => {
         .replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase());
 };
 
+
 export const rating = (value) => {
     return (Math.round(Number(value) * 2) / 2) / 2;
+};
+
+export const apiCall = async (url) => {
+    const response = await fetch(url);
+    let text = await response.text();
+    let json = text && text.length ? JSON.parse(text) : {};
+
+    if (response.ok) {
+        return json;
+    } else {
+        throw json.error;
+    }
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import {useHistory} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {fetchMovieDetails} from "../storage/actions";
+import {fetchMovie} from "../storage/actions";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
@@ -41,8 +41,8 @@ const CacheRow = (props) => {
     const classes = useStyles();
 
     const handleClick = (movie) => {
-        dispatch(fetchMovieDetails(movie.details.imdbId));
-
+        dispatch(fetchMovie(movie.details.imdbId));
+        window.scrollTo(0,0);
         history.push("/movie/" + slugify(movie.details.title));
     };
 

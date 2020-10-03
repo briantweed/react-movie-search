@@ -1,6 +1,8 @@
 import * as action from "../actionTypes";
 import * as Const from "../../constants";
 import store from '../store';
+import {ADAPTOR} from "../../constants";
+import {apiCall} from "../../helpers";
 
 
 export const storeMovieSearch = (data) => {
@@ -69,15 +71,18 @@ export const changePage = (page) => ({
 export const updateCache = (movie) => ({
     type: action.CACHE,
     payload: movie
-})
-
+});
 
 
 export const fetchMovies = () => {
     return async (dispatch) => {
         dispatch(fetchMoviesBegin());
         try {
-            const json = await getMovies();
+            const filter = store.getState().search;
+            const page = store.getState().results.page;
+            const {ApiAdaptor} = await import('../../adaptors/' + ADAPTOR);
+            const adaptor = new ApiAdaptor();
+            const json = await adaptor.fetchMovies(filter, page);
             dispatch(fetchMoviesSuccess(json));
             return json;
         } catch (error) {
@@ -86,27 +91,58 @@ export const fetchMovies = () => {
     };
 };
 
-export const fetchMovieDetails = (movieId) => {
+
+export const fetchMovie = (movieId) => {
     return async (dispatch) => {
         dispatch(fetchMovieBegin());
         try {
-            const data = {};
             const cache = store.getState().cache;
             const cached = cache.find(movie => movie.id === movieId);
             if (cached) {
                 dispatch(fetchMovieSuccess(cached));
             } else {
-                const details = await getMovie(movieId);
-                const cast = await getCast(movieId);
-                const crew = await getCrew(movieId);
-                data.details = details.data;
-                data.cast = cast.data;
-                data.crew = crew.data;
-                dispatch(fetchMovieSuccess(data));
-                dispatch(updateCache(data));
+                const {ApiAdaptor} = await import('../../adaptors/' + ADAPTOR);
+                const adaptor = new ApiAdaptor();
+                const json = await adaptor.fetchMovie(movieId);
+
+                console.log(json);
+
+                // const details = await getMovie(movieId);
+                // const cast = await getCast(movieId);
+                // const crew = await getCrew(movieId);
+                // data.details = details.data;
+                // data.cast = cast.data;
+                // data.crew = crew.data;
+                dispatch(fetchMovieSuccess(json));
+                dispatch(updateCache(json));
             }
         } catch (error) {
             dispatch(fetchMovieFailure(error));
+        }
+    };
+};
+
+
+export const fetchPreviousMovieDetails = (movieId) => {
+    return async (dispatch) => {
+        const cache = store.getState().cache;
+        const thisMovie = cache.findIndex(movie => movie.id === movieId);
+        const nextMovie = cache[thisMovie - 1];
+        if (nextMovie){
+            dispatch(fetchMovieSuccess(nextMovie));
+        }
+    };
+};
+
+
+
+export const fetchNextMovieDetails = (movieId) => {
+    return async (dispatch) => {
+        const cache = store.getState().cache;
+        const thisMovie = cache.findIndex(movie => movie.id === movieId);
+        const nextMovie = cache[thisMovie + 1];
+        if (nextMovie){
+            dispatch(fetchMovieSuccess(nextMovie));
         }
     };
 };
@@ -120,15 +156,11 @@ export const updatePage = (page) => {
 };
 
 
-const getMovies = async () => {
-    const filter = store.getState().search;
-    const page = store.getState().results.page;
-    return await apiCall(Const.MOVIE_API_URL + "movie/search?exact=true&title=" + filter.title + "&year=" + (filter.year ? filter.year : '') + "&page=" + page + "&token=" + Const.MOVIE_API_TOKEN);
-};
-
-
 const getMovie = async (movieId) => {
-    return await apiCall(Const.MOVIE_API_URL + "movie/" + movieId + "?token=" + Const.MOVIE_API_TOKEN);
+    const {ApiAdaptor} = await import('../../adaptors/' + ADAPTOR);
+    const adaptor = new ApiAdaptor();
+    return adaptor.fetchMovie(movieId);
+    // return await apiCall(Const.MOVIE_API_URL + "movie/" + movieId + "?token=" + Const.MOVIE_API_TOKEN);
 };
 
 
@@ -139,17 +171,4 @@ const getCast = async (movieId) => {
 
 const getCrew = async (movieId) => {
     return await apiCall(Const.MOVIE_API_URL + "movie/" + movieId + "/crew?token=" + Const.MOVIE_API_TOKEN);
-};
-
-
-const apiCall = async (url) => {
-    const response = await fetch(url);
-    let text = await response.text();
-    let json = text && text.length ? JSON.parse(text) : {};
-
-    if (response.ok) {
-        return json;
-    } else {
-        throw json.error;
-    }
 };

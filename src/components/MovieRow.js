@@ -2,7 +2,7 @@ import React from "react";
 import shortId from "shortid";
 import {useDispatch} from "react-redux";
 import {useHistory} from "react-router-dom";
-import {fetchMovieDetails} from "../storage/actions";
+import {fetchMovie} from "../storage/actions";
 import withStyles from "@material-ui/core/styles/withStyles";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
@@ -31,32 +31,8 @@ const MovieRow = (props) => {
 
     const {movie} = props;
 
-
-    const formatReleaseDate = (releaseDate) => {
-        if (releaseDate) {
-            if (releaseDate.length === 4) {
-                return releaseDate;
-            } else {
-                const year = releaseDate.slice(0, 4);
-                const month = releaseDate.slice(4, 6);
-                const day = releaseDate.slice(6, 8);
-                return day + "-" + month + "-" + year;
-            }
-        }
-        return "n/a";
-    };
-
-
-    const formatRuntime = (runtime) => {
-        if (runtime) {
-            return runtime.replace(" ", "");
-        }
-        return "n/a";
-    };
-
-
     const handleClick = (movie) => {
-        dispatch(fetchMovieDetails(movie.imdbId));
+        dispatch(fetchMovie(movie.imdbId));
 
         history.push("/movie/" + slugify(movie.title));
     };
@@ -69,10 +45,10 @@ const MovieRow = (props) => {
             </TableCell>
             <TableCell>{movie.year ? movie.year : "n/a"}</TableCell>
             <Hidden xsDown>
-                <TableCell>{formatReleaseDate(movie.releaseDate)}</TableCell>
+                <TableCell>{ movie.releaseDate }</TableCell>
             </Hidden>
             <Hidden smDown>
-                <TableCell>{formatRuntime(movie.runtime)}</TableCell>
+                <TableCell>{ movie.runtime }</TableCell>
             </Hidden>
         </TableRow>
     )

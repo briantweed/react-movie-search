@@ -46,17 +46,17 @@ const CastList = (props) => {
                             return (
                                 <TableRow key={shortId.generate()}>
 
-                                    <TableCell>{cast.character}</TableCell>
+                                    <TableCell>{ cast.character }</TableCell>
                                     <TableCell>
                                         <ButtonLink
                                             disableRipple
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             href={'https://www.imdb.com/name/' + actor.imdbId}
-                                        >{actor.name}</ButtonLink>
+                                        >{ actor.name }</ButtonLink>
                                     </TableCell>
-                                </TableRow>
 
+                                </TableRow>
                             )
                         })}
                     </TableBody>

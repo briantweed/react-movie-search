@@ -1,5 +1,5 @@
 import React from "react";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import Rating from "@material-ui/lab/Rating";
 import Box from "@material-ui/core/Box";
@@ -9,9 +9,12 @@ import {yellow} from '@material-ui/core/colors';
 import {rating} from "../helpers";
 import CastList from "./CastList";
 import CrewList from "./CrewList";
+import {fetchPreviousMovieDetails, fetchNextMovieDetails} from "../storage/actions";
 
 
 const Movie = () => {
+
+    const dispatch = useDispatch();
 
     const {movie} = useSelector((state) => state.movie);
 
@@ -20,6 +23,16 @@ const Movie = () => {
     if(!movie.details) {
         return null;
     }
+
+
+    const getPreviousMovie = (id) => {
+        dispatch(fetchPreviousMovieDetails(id));
+    };
+
+
+    const getNextMovie = (id) => {
+        dispatch(fetchNextMovieDetails(id));
+    };
 
 
     const ColorButton = withStyles((theme) => ({
@@ -35,6 +48,12 @@ const Movie = () => {
 
     return (
         <>
+
+            <Grid item xs={12}>
+                <button onClick={e => getPreviousMovie(details.imdbId)}>previous</button>
+                <button onClick={e => getNextMovie(details.imdbId)}>next</button>
+            </Grid>
+
             <Grid item sm={6} md={4} lg={3}>
                 <img
                     style={{width: '100%'}}
@@ -90,6 +109,7 @@ const Movie = () => {
 
                 </Grid>
             </Grid>
+
         </>
     )
 
