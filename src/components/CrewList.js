@@ -6,7 +6,6 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
-import {capitalize} from "../helpers";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Button from "@material-ui/core/Button";
 
@@ -40,13 +39,11 @@ const CrewList = (props) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {crew.map(crew => {
-
-                            const {name: person} = crew;
+                        {crew.map(person => {
 
                             return (
                                 <TableRow key={shortId.generate()}>
-                                    <TableCell>{capitalize(crew.type)}</TableCell>
+                                    <TableCell>{ person.type }</TableCell>
                                     <TableCell>
                                         <ButtonLink
                                             disableRipple

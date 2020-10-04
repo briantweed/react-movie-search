@@ -39,21 +39,19 @@ const CastList = (props) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {cast.map(cast => {
-
-                            const {name: actor} = cast;
+                        {cast.map(person => {
 
                             return (
                                 <TableRow key={shortId.generate()}>
 
-                                    <TableCell>{ cast.character }</TableCell>
+                                    <TableCell>{ person.character }</TableCell>
                                     <TableCell>
                                         <ButtonLink
                                             disableRipple
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            href={'https://www.imdb.com/name/' + actor.imdbId}
-                                        >{ actor.name }</ButtonLink>
+                                            href={'https://www.imdb.com/name/' + person.imdbId}
+                                        >{ person.name }</ButtonLink>
                                     </TableCell>
 
                                 </TableRow>

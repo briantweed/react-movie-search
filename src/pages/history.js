@@ -1,7 +1,6 @@
 import React from 'react';
 import Helmet from "react-helmet";
-import SearchHistoryList from "../components/SearchHistoryList";
-import SearchContainer from "../components/SearchContainer";
+import HistoryContainer from "../components/HistoryContainer";
 
 
 const History = () => {
@@ -13,10 +12,8 @@ const History = () => {
                 <title>MovieSearch | Search History</title>
             </Helmet>
 
-            <SearchContainer/>
-
-            <SearchHistoryList/>
-
+            <HistoryContainer/>
+            
         </>
     )
 

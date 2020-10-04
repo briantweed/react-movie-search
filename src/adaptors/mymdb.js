@@ -1,4 +1,4 @@
-import {apiCall} from "../helpers";
+import {apiCall, rating} from "../helpers";
 
 
 /**
@@ -101,7 +101,7 @@ export class ApiAdaptor {
         data.posterUrl = this.formatPosterUrl(movie.image);
         data.title = movie.name;
         data.year = movie.released;
-        data.rating = movie.rating;
+        data.rating = rating(movie.rating);
         data.runtime = this.formatRuntime(movie.running_time);
         data.rated = movie.certificate.title;
         return data;
@@ -117,9 +117,8 @@ export class ApiAdaptor {
     formatCast = (cast) => {
         return cast.map(person => {
             const data = {};
-            data.name = {};
-            data.name.imdbId = person.imdb_id;
-            data.name.name = person.fullname;
+            data.imdbId = person.imdb_id;
+            data.name = person.fullname;
             data.character = person.pivot.character;
             return data;
         });
@@ -135,9 +134,8 @@ export class ApiAdaptor {
     formatCrew = (crew) => {
         return crew.map(person => {
             const data = {};
-            data.name = {};
-            data.name.imdbId = person.imdb_id;
-            data.name.name = person.fullname;
+            data.imdbId = person.imdb_id;
+            data.name = person.fullname;
             data.type = person.pivot.position;
             return data;
         });

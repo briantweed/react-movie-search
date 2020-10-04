@@ -1,4 +1,4 @@
-import {apiCall} from "../helpers";
+import {apiCall, capitalize, rating} from "../helpers";
 import {MOVIE_API_TOKEN} from "../constants";
 
 
@@ -48,9 +48,9 @@ export class ApiAdaptor {
         const crew = await apiCall(crewUrl);
 
         const movie = {};
-        movie.details = details.data;
-        movie.cast = cast.data;
-        movie.crew = crew.data;
+        movie.details = this.formatDetails(details.data);
+        movie.cast = this.formatCast(cast.data);
+        movie.crew = this.formatCrew(crew.data);
 
         return movie;
     };
@@ -73,6 +73,51 @@ export class ApiAdaptor {
             };
         });
         return formattedData;
+    };
+
+
+    /**
+     * Format movie details.
+     *
+     * @param movie
+     */
+    formatDetails = (movie) => {
+        movie.rating = rating(movie.rating);
+        return movie;
+    };
+
+
+    /**
+     * Format cast details.
+     *
+     * @param cast
+     * @returns {*}
+     */
+    formatCast = (cast) => {
+        return cast.map(person => {
+            const data = {};
+            data.imdbId = person.name.imdbId;
+            data.name = person.name.name;
+            data.character = person.character;
+            return data;
+        });
+    };
+
+
+    /**
+     * Format cast details.
+     *
+     * @param cast
+     * @returns {*}
+     */
+    formatCrew = (cast) => {
+        return cast.map(person => {
+            const data = {};
+            data.imdbId = person.name.imdbId;
+            data.name = person.name.name;
+            data.type = capitalize(person.type);
+            return data;
+        });
     };
 
 

@@ -70,7 +70,7 @@ const Movie = () => {
                     <Box mb={2}>
                         <Rating
                             name="half-rating-read"
-                            value={rating(details.rating)}
+                            value={details.rating}
                             precision={0.5}
                             readOnly
                         />
