@@ -1,15 +1,14 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
+import {fetchPreviousMovieDetails, fetchNextMovieDetails} from "../storage/actions";
 import Grid from "@material-ui/core/Grid";
 import Rating from "@material-ui/lab/Rating";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import withStyles from "@material-ui/core/styles/withStyles";
 import {yellow} from '@material-ui/core/colors';
-import {rating} from "../helpers";
 import CastList from "./CastList";
 import CrewList from "./CrewList";
-import {fetchPreviousMovieDetails, fetchNextMovieDetails} from "../storage/actions";
 
 
 const Movie = () => {

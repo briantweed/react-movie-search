@@ -13,7 +13,7 @@ const History = () => {
             </Helmet>
 
             <HistoryContainer/>
-            
+
         </>
     )
 

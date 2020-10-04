@@ -1,15 +1,7 @@
 import React, {useState, useEffect} from "react";
 import {useHistory} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {
-    fetchMovies,
-    storeMovieSearch,
-    clearMovies,
-    clearMovie,
-    clearSearch,
-    storeSearchHistory,
-    changePage
-} from "../storage/actions";
+import {fetchMovies, storeMovieSearch, clearMovies, clearMovie, clearSearch, storeSearchHistory, changePage} from "../storage/actions";
 import Grid from "@material-ui/core/Grid";
 import SearchByTitle from "./SearchByTitle";
 import SearchByYear from "./SearchByYear";

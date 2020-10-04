@@ -1,4 +1,4 @@
-import {apiCall, capitalize, rating} from "../helpers";
+import {apiCall, capitalize, rating, slugify} from "../helpers";
 import {MOVIE_API_TOKEN} from "../constants";
 
 
@@ -68,6 +68,7 @@ export class ApiAdaptor {
         formattedData.data = movies.map(movie => {
             return {
                 ...movie,
+                slug: slugify(movie.title),
                 runtime: this.formatRuntime(movie.runtime),
                 releaseDate: this.formatReleaseDate(movie.releaseDate)
             };
@@ -82,6 +83,7 @@ export class ApiAdaptor {
      * @param movie
      */
     formatDetails = (movie) => {
+        movie.slug = slugify(movie.title);
         movie.rating = rating(movie.rating);
         return movie;
     };

@@ -8,7 +8,6 @@ import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import Hidden from "@material-ui/core/Hidden";
 import Button from "@material-ui/core/Button";
-import {slugify} from "../helpers";
 
 
 const ButtonLink = withStyles(() => ({
@@ -34,7 +33,7 @@ const MovieRow = (props) => {
     const handleClick = (movie) => {
         dispatch(fetchMovie(movie.imdbId));
 
-        history.push("/movie/" + slugify(movie.title));
+        history.push("/movie/" + movie.slug);
     };
 
 

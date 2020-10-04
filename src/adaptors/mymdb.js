@@ -62,6 +62,7 @@ export class ApiAdaptor {
                 releaseDate: movie.released,
                 runtime: this.formatRuntime(movie.running_time),
                 title: movie.name,
+                slug: movie.slug,
                 year: movie.released
             }
         });
@@ -100,6 +101,7 @@ export class ApiAdaptor {
         data.plot = movie.bio;
         data.posterUrl = this.formatPosterUrl(movie.image);
         data.title = movie.name;
+        data.slug = movie.slug;
         data.year = movie.released;
         data.rating = rating(movie.rating);
         data.runtime = this.formatRuntime(movie.running_time);

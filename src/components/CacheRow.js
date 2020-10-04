@@ -9,7 +9,6 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Rating from "@material-ui/lab/Rating";
-import {rating, slugify} from "../helpers";
 
 
 const useStyles = makeStyles(() => ({
@@ -43,7 +42,7 @@ const CacheRow = (props) => {
     const handleClick = (movie) => {
         dispatch(fetchMovie(movie.details.imdbId));
         window.scrollTo(0,0);
-        history.push("/movie/" + slugify(movie.details.title));
+        history.push("/movie/" + movie.details.slug);
     };
 
 
