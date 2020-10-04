@@ -96,17 +96,17 @@ const Movie = () => {
                 </Grid>
             </Grid>
 
-            <Grid item container justify="space-around">
+            <Grid item container>
                 <Grid item xs={12} md={5}>
-
-                    <CastList cast={cast}/>
-
+                    <Box mb={8}>
+                        <CastList cast={cast}/>
+                    </Box>
                 </Grid>
-
+                <Grid item xs={12} md={1}/>
                 <Grid item xs={12} md={5}>
-
-                    <CrewList crew={crew}/>
-
+                    <Box mb={8}>
+                        <CrewList crew={crew}/>
+                    </Box>
                 </Grid>
             </Grid>
 

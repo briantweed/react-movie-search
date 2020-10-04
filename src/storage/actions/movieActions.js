@@ -1,8 +1,6 @@
 import * as action from "../actionTypes";
-import * as Const from "../../constants";
 import store from '../store';
 import {ADAPTOR} from "../../constants";
-import {apiCall} from "../../helpers";
 
 
 export const storeMovieSearch = (data) => {
@@ -105,14 +103,6 @@ export const fetchMovie = (movieId) => {
                 const adaptor = new ApiAdaptor();
                 const json = await adaptor.fetchMovie(movieId);
 
-                console.log(json);
-
-                // const details = await getMovie(movieId);
-                // const cast = await getCast(movieId);
-                // const crew = await getCrew(movieId);
-                // data.details = details.data;
-                // data.cast = cast.data;
-                // data.crew = crew.data;
                 dispatch(fetchMovieSuccess(json));
                 dispatch(updateCache(json));
             }
@@ -135,7 +125,6 @@ export const fetchPreviousMovieDetails = (movieId) => {
 };
 
 
-
 export const fetchNextMovieDetails = (movieId) => {
     return async (dispatch) => {
         const cache = store.getState().cache;
@@ -153,22 +142,4 @@ export const updatePage = (page) => {
         dispatch(changePage(page));
         dispatch(fetchMovies());
     };
-};
-
-
-const getMovie = async (movieId) => {
-    const {ApiAdaptor} = await import('../../adaptors/' + ADAPTOR);
-    const adaptor = new ApiAdaptor();
-    return adaptor.fetchMovie(movieId);
-    // return await apiCall(Const.MOVIE_API_URL + "movie/" + movieId + "?token=" + Const.MOVIE_API_TOKEN);
-};
-
-
-const getCast = async (movieId) => {
-    return await apiCall(Const.MOVIE_API_URL + "movie/" + movieId + "/actors?token=" + Const.MOVIE_API_TOKEN);
-};
-
-
-const getCrew = async (movieId) => {
-    return await apiCall(Const.MOVIE_API_URL + "movie/" + movieId + "/crew?token=" + Const.MOVIE_API_TOKEN);
 };

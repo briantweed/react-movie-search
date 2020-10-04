@@ -1,27 +1,57 @@
 import {apiCall} from "../helpers";
 
 
+/**
+ * Adaptor for MyMDb
+ *
+ * https://github.com/briantweed/MyMDb_V2
+ */
 export class ApiAdaptor {
 
+
     constructor() {
-        this.base = "http://mymdb.test";
-        this.url = this.base + "/api/movies";
+        this.basePath = "http://mymdb.test";
+        this.imagePath = this.basePath + "/images/covers";
+        this.apiPath = this.basePath + "/api/movies";
+        this.imdbPath = "https://www.imdb.com/title";
     }
 
+
+    /**
+     * Return movie search results.
+     *
+     * @param filter
+     * @param page
+     * @returns {Promise<*>}
+     */
     fetchMovies = async (filter, page) => {
-        const url = this.url + '?name=' + filter.title
+        const url = this.apiPath + '?name=' + filter.title
             + '&released=' + filter.year
             + '&page=' + page;
         const data = await apiCall(url);
         return this.formatMovies(data);
     };
 
+
+    /**
+     * Return movie info.
+     *
+     * @param movieId
+     * @returns {Promise<{}>}
+     */
     fetchMovie = async (movieId) => {
-        const url = this.url + '/' + movieId;
+        const url = this.apiPath + '/' + movieId;
         const data = await apiCall(url);
         return this.formatMovie(data);
     };
 
+
+    /**
+     * Format movie search results for display.
+     *
+     * @param incomingData
+     * @returns {*}
+     */
     formatMovies = (incomingData) => {
         const {movies} = incomingData;
         const {data, ...rest} = movies;
@@ -30,7 +60,7 @@ export class ApiAdaptor {
             return {
                 imdbId: movie.imdb_id,
                 releaseDate: movie.released,
-                runtime: formatRuntime(movie.running_time),
+                runtime: this.formatRuntime(movie.running_time),
                 title: movie.name,
                 year: movie.released
             }
@@ -38,40 +68,115 @@ export class ApiAdaptor {
         return formattedData;
     };
 
+
+    /**
+     * Format movie info for display.
+     *
+     * @param incomingData
+     * @returns {{}}
+     */
     formatMovie = (incomingData) => {
         const {movie} = incomingData;
         const data = {};
-        const details = {};
 
-        details.imdbId = movie.imbd_id;
-        details.plot = movie.bio;
-        details.posterUrl = this.base + '/' + movie.image;
-        details.title = movie.name;
-        details.year = movie.released;
-        details.rating = movie.rating;
-        details.runtime = formatRuntime(movie.running_time);
-        details.rated = movie.certificate.title;
+        data.details = this.formatDetails(movie);
+        data.cast = this.formatCast(movie.cast);
+        data.crew = this.formatCrew(movie.crew);
 
-        data.details = details;
-        data.cast = [];//this.formatCast(movie.cast);
-        data.crew = [];//this.formatCrew(movie.crew);
         return data;
     };
 
-    formatCast = (incomingData) => {
-        return [];
+
+    /**
+     * Format movie details.
+     *
+     * @param movie
+     * @returns {{}}
+     */
+    formatDetails = (movie) => {
+        const data = {};
+        data.imdbId = movie.imdb_id;
+        data.imdbUrl = this.formatImdbUrl(movie.imdb_id);
+        data.plot = movie.bio;
+        data.posterUrl = this.formatPosterUrl(movie.image);
+        data.title = movie.name;
+        data.year = movie.released;
+        data.rating = movie.rating;
+        data.runtime = this.formatRuntime(movie.running_time);
+        data.rated = movie.certificate.title;
+        return data;
     };
 
-    formatCrew = (incomingData) => {
-        return [];
+
+    /**
+     * Format cast details.
+     *
+     * @param cast
+     * @returns {*}
+     */
+    formatCast = (cast) => {
+        return cast.map(person => {
+            const data = {};
+            data.name = {};
+            data.name.imdbId = person.imdb_id;
+            data.name.name = person.fullname;
+            data.character = person.pivot.character;
+            return data;
+        });
+    };
+
+
+    /**
+     * Format crew details.
+     *
+     * @param crew
+     * @returns {*}
+     */
+    formatCrew = (crew) => {
+        return crew.map(person => {
+            const data = {};
+            data.name = {};
+            data.name.imdbId = person.imdb_id;
+            data.name.name = person.fullname;
+            data.type = person.pivot.position;
+            return data;
+        });
+    };
+
+
+    /**
+     * Format link to IMDb.
+     *
+     * @param imdbId
+     * @returns {string}
+     */
+    formatImdbUrl = (imdbId) => {
+        return this.imdbPath + "/" + imdbId;
+    };
+
+
+    /**
+     * Format poster url.
+     *
+     * @param filename
+     * @returns {string}
+     */
+    formatPosterUrl = (filename) => {
+        return this.imagePath + '/' + filename;
+    };
+
+
+    /**
+     * Format running time for display.
+     *
+     * @param runtime
+     * @returns {string}
+     */
+    formatRuntime = (runtime) => {
+        if (runtime) {
+            return String(runtime).replace(" ", "") + "mins";
+        }
+        return "n/a";
     };
 
 }
-
-
-const formatRuntime = (runtime) => {
-    if (runtime) {
-        return String(runtime).replace(" ", "") + "mins";
-    }
-    return "n/a";
-};
