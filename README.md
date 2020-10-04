@@ -7,8 +7,18 @@ Run `npm install`
 
 Add `.env.local` to root directory.
 
-The only env variable is `REACT_APP_MOVIE_API_TOKEN` . 
-Register with [MyApiMovies](https://www.myapimovies.com/register) to generate the necessary token
+```
+REACT_APP_ADAPTOR =  // `myapimovies` or `mymdb`
+REACT_APP_MOVIE_API_TOKEN = // only needed for `myapimovies` 
+```
+
+#### MyApiMovies
+Register with [MyApiMovies](https://www.myapimovies.com/register) to generate the necessary token. Free version is limited to 100 requests per day.
+
+#### MyMDb
+MyMDb is a Laravel site containing a database of my current movie collection. Download from https://github.com/briantweed/MyMDb_V2
+
+---
 
 
 ## Available Scripts
