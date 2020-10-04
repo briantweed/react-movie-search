@@ -20,7 +20,6 @@ MyMDb is a Laravel site containing a database of my current movie collection. Do
 
 ---
 
-
 ## Available Scripts
 
 In the project directory, you can run:
