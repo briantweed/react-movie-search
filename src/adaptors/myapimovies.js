@@ -84,7 +84,7 @@ export class ApiAdaptor {
      */
     formatDetails = (movie) => {
         movie.slug = slugify(movie.title);
-        movie.rating = rating(movie.rating);
+        movie.score = rating(movie.rating);
         return movie;
     };
 

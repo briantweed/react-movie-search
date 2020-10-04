@@ -103,7 +103,7 @@ export class ApiAdaptor {
         data.title = movie.name;
         data.slug = movie.slug;
         data.year = movie.released;
-        data.rating = rating(movie.rating);
+        data.score = rating(movie.rating);
         data.runtime = this.formatRuntime(movie.running_time);
         data.rated = movie.certificate.title;
         return data;

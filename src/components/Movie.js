@@ -69,7 +69,7 @@ const Movie = () => {
                     <Box mb={2}>
                         <Rating
                             name="half-rating-read"
-                            value={details.rating}
+                            value={details.score}
                             precision={0.5}
                             readOnly
                         />
@@ -77,7 +77,7 @@ const Movie = () => {
                 </Grid>
                 <Grid container item spacing={5} xs={12}>
                     <Grid item>{ details.runtime }</Grid>
-                    <Grid item>{ details.rated }</Grid>
+                    <Grid item>{ details.score }</Grid>
                 </Grid>
                 <Grid item>
                     <Box my={3}>

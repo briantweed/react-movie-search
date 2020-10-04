@@ -62,7 +62,7 @@ const CacheRow = (props) => {
                         <Typography variant="subtitle1" color="textSecondary">
                             <Rating
                                 name="half-rating-read"
-                                value={details.rating}
+                                value={details.score}
                                 precision={0.5}
                                 readOnly
                             />
