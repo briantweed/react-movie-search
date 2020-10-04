@@ -3,31 +3,21 @@ import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 
 
-const SearchByYear = (props) => {
-
-    const searchableYears = () => {
-        const years = [''];
-        const thisYear = new Date().getFullYear();
-        for (let year = thisYear; year >= 1900; year--) {
-            years.push(year.toString());
-        }
-        return years;
-    };
-
+const SelectFilter = (props) => {
 
     return (
         <Autocomplete
-            id="year"
+            id={props.id}
             fullWidth
             autoSelect
             autoHighlight
-            options={searchableYears()}
+            options={props.options}
             onChange={props.action}
-            value={props.year}
+            value={props.value}
             renderInput={(params) => {
                 return <TextField
                     {...params}
-                    label="Release Year"
+                    label={props.label}
                     size="small"
                     variant="outlined"
                     color="primary"
@@ -40,4 +30,4 @@ const SearchByYear = (props) => {
 };
 
 
-export default SearchByYear;
+export default SelectFilter;

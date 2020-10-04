@@ -12,7 +12,6 @@ export class ApiAdaptor {
     constructor() {
         this.basePath = "http://mymdb.test";
         this.imagePath = this.basePath + "/images/covers";
-        this.apiPath = this.basePath + "/api/movies";
         this.imdbPath = "https://www.imdb.com/title";
     }
 
@@ -25,7 +24,7 @@ export class ApiAdaptor {
      * @returns {Promise<*>}
      */
     fetchMovies = async (filter, page) => {
-        const url = this.apiPath + '?name=' + filter.title
+        const url = this.basePath + '/api/movies?name=' + filter.title
             + '&released=' + filter.year
             + '&page=' + page;
         const data = await apiCall(url);
@@ -40,9 +39,21 @@ export class ApiAdaptor {
      * @returns {Promise<{}>}
      */
     fetchMovie = async (movieId) => {
-        const url = this.apiPath + '/' + movieId;
+        const url = this.basePath + '/api/movies/' + movieId;
         const data = await apiCall(url);
         return this.formatMovie(data);
+    };
+
+
+    /**
+     * Return movie sorting tags.
+     *
+     * @returns {Promise<void>}
+     */
+    fetchMovieTags = async () => {
+        const url = this.basePath + '/api/tags';
+        const data = await apiCall(url);
+        return data.tags;
     };
 
 
@@ -103,7 +114,7 @@ export class ApiAdaptor {
         data.title = movie.name;
         data.slug = movie.slug;
         data.year = movie.released;
-        data.score = rating(movie.rating);
+        data.rating = rating(movie.rating);
         data.runtime = this.formatRuntime(movie.running_time);
         data.rated = movie.certificate.title;
         return data;
