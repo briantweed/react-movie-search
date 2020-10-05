@@ -1,3 +1,6 @@
+import {ADAPTOR} from "./constants";
+
+
 export const slugify = (string) => {
     const a = 'àáäâãåăæąçćčđďèéěėëêęğǵḧìíïîįłḿǹńňñòóöôœøṕŕřßşśšșťțùúüûǘůűūųẃẍÿýźžż·/_,:;';
     const b = 'aaaaaaaaacccddeeeeeeegghiiiiilmnnnnooooooprrsssssttuuuuuuuuuwxyyzzz------';
@@ -37,4 +40,32 @@ export const apiCall = async (url) => {
     } else {
         throw json.error;
     }
+};
+
+export const searchableYears = () => {
+    const years = [''];
+    const thisYear = new Date().getFullYear();
+    for (let year = thisYear; year >= 1900; year--) {
+        years.push(year.toString());
+    }
+    return years;
+};
+
+
+export const getMovieRatingOptions = () => {
+    const options = [];
+    for (let x = 1; x <= 10; x++) {
+        const option = {};
+        option.value = x.toString();
+        option.label = x.toString();
+        options.push(option);
+    }
+    return options;
+};
+
+
+export const getMovieTags = async () => {
+    const {ApiAdaptor} = await import('./adaptors/' + ADAPTOR);
+    const adaptor = new ApiAdaptor();
+    return await adaptor.fetchMovieTags();
 };

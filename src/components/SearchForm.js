@@ -6,6 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import SearchByTitle from "./SearchByTitle";
 import SearchByYear from "./SearchByYear";
 import SearchSubmitButton from "./SearchSubmitButton";
+import {searchableYears} from "../helpers";
 
 
 const SearchForm = () => {
@@ -77,6 +78,7 @@ const SearchForm = () => {
                     <SearchByYear
                         action={updateSelect}
                         year={searchForm.year}
+                        options={searchableYears()}
                     />
                 </Grid>
                 <Grid item xs={12} sm={4} lg={2}>
