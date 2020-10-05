@@ -5,9 +5,11 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 
 const SelectFilter = (props) => {
 
+    console.log('hi');
+
     return (
         <Autocomplete
-            id={props.id}
+            id={props.name}
             fullWidth
             autoSelect
             autoHighlight

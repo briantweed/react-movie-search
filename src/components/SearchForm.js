@@ -21,23 +21,23 @@ const SearchForm = () => {
         title: title,
         year: year
     });
-
-
-    const updateField = e => {
-        setSearchForm({
-            ...searchForm,
-            [e.target.name]: e.target.value
-        });
-    };
-
-
-    const updateSelect = (e, value) => {
-        setSearchForm({
-            ...searchForm,
-            year: value
-        });
-    };
-
+    //
+    //
+    // const updateField = e => {
+    //     setSearchForm({
+    //         ...searchForm,
+    //         [e.target.name]: e.target.value
+    //     });
+    // };
+    //
+    //
+    // const updateSelect = (e, value) => {
+    //     setSearchForm({
+    //         ...searchForm,
+    //         year: value
+    //     });
+    // };
+    //
 
     const clearFields = () => {
         setSearchForm({

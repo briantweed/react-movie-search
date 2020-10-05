@@ -1,23 +1,15 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
-// import withStyles from "@material-ui/core/styles/withStyles";
-//
-//
-// const SearchField = withStyles(() => ({
-//     root: {
-//         "& label .MuiFormLabel-asterisk": {
-//             color: "#d8000d"
-//         }
-//     }
-// }))(TextField);
 
 
 const TextFilter = (props) => {
 
+    console.log('yo');
+
     return (
         <TextField
-            id={props.id}
-            name={props.id}
+            id={props.name}
+            name={props.name}
             label={props.label}
             value={props.value}
             size="small"
