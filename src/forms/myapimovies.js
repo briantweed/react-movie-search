@@ -1,6 +1,5 @@
 import {searchableYears} from "../helpers";
 
-
 export default {
 
     name: "MyApiMovies",
